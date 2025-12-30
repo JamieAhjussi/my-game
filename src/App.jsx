@@ -1,13 +1,14 @@
-import "./App.css";
+import { useState } from 'react'
+import Layout from './components/layout/Layout'
+import Button from './components/ui/Button'
+import NavBar from './components/NavBar'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <section>
-      <h1 className="text-headline-1 text-(--color-brand-green)">
-        My First React App on Vite
-      </h1>
-    </section>
-  );
+    <NavBar></NavBar>
+  )
 }
 
-export default App;
+export default App
