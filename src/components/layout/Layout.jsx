@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         </nav>
       </header>
       
-      <main className="flex-grow container mx-auto p-6">
+      <main className="grow container mx-auto p-6">
         {children}
       </main>
 
