@@ -14,7 +14,7 @@ function HeroSection () {
           </p>
         </div>
         <img
-          src="https://s3-alpha-sig.figma.com/img/14d0/ff1e/c045ed1d618b25c84aa4327331ecdaaf?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Bn23rfauU9Vo2JZBCnSrOOH4fvcDp3RVcQKQnKfgzLweRCaPnG9W-EL3Y1KTZEIurmVd2CSy4XRKt9uS5R73SiSpRwjF-MKLHYXN-S9nrAqCkgN8YXV~FLWPgUFbVyVMEJmI8YPqwUKT3a9pqWhFsAwDzHEleB01X6HJunynyTt94XHnRy9q4P3mOEpj3EQn5YzQ4KKFcVrWFehS9doRzXyIyjQ45Wkdi7Y3TW~sR4VaVI-G2l0IzJwAE6LCFc~c0~0uwg2ua6lATcc5PzsgIG9~gntupkzhncQ6ehAyMtPJ~WjKrR9FomTrFL2FOoR01Hya~JUzMiRJLxOmJAApgg__"
+          src="./src/assets/image/IMG_0429.jpg"
           alt="No picture yet"
           className="h-[530px] object-cover rounded-lg shadow-lg lg:w-1/3 mx-4 mb-8 lg:mb-0"
         />

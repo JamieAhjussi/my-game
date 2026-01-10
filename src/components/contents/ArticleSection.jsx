@@ -10,6 +10,12 @@ import {
 
 
 function ArticleSection () {
+  const categories = [
+    { value: "highlight", label: "Highlight" },
+    { value: "cat", label: "Cat" },
+    { value: "inspiration", label: "Inspiration" },
+    { value: "general", label: "General" },
+  ];
     return (
     <div className="w-full max-w-7xl mx-auto md:px-6 lg:px-8 mb-10">
       <h2 className="text-xl font-bold mb-4 px-4">Latest articles</h2>
@@ -30,10 +36,15 @@ function ArticleSection () {
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="highlight">Highlight</SelectItem>
+              {/*<SelectItem value="highlight">Highlight</SelectItem>
               <SelectItem value="cat">Cat</SelectItem>
               <SelectItem value="inspiration">Inspiration</SelectItem>
-              <SelectItem value="general">General</SelectItem>
+              <SelectItem value="general">General</SelectItem>*/}
+              {categories.map((category) => (
+                <SelectItem key={category.value} value={category.value}>
+                  {category.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
