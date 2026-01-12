@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,14 +13,16 @@ import BlogCard from "./BlogCard";
 
 
 function ArticleSection () {
+  const [currentCategory, setCurrentCategory] = useState("highlight");
+  
   const categories = [
     { value: "highlight", label: "Highlight" },
     { value: "cat", label: "Cat" },
     { value: "inspiration", label: "Inspiration" },
     { value: "general", label: "General" },
-    
   ];
-    return (
+
+  return (
     <div className="w-full max-w-7xl mx-auto md:px-6 lg:px-8 mb-20">
       <h2 className="text-xl font-bold mb-4 px-4">Latest articles</h2>
       <div className="bg-[#EFEEEB] px-4 py-4 md:py-3 md:rounded-sm flex flex-col space-y-4 md:flex-row-reverse md:items-center md:space-y-0 md:justify-between">
@@ -34,15 +37,11 @@ function ArticleSection () {
           </div>
         </div>
         <div className="md:hidden w-full">
-          <Select value="highlight">
+          <Select value={currentCategory} onValueChange={setCurrentCategory}>
             <SelectTrigger className="w-full py-3 rounded-sm text-muted-foreground">
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
             <SelectContent>
-              {/*<SelectItem value="highlight">Highlight</SelectItem>
-              <SelectItem value="cat">Cat</SelectItem>
-              <SelectItem value="inspiration">Inspiration</SelectItem>
-              <SelectItem value="general">General</SelectItem>*/}
               {categories.map((category) => (
                 <SelectItem key={category.value} value={category.value}>
                   {category.label}
@@ -52,30 +51,19 @@ function ArticleSection () {
           </Select>
         </div>
         <div className="hidden md:flex space-x-2">
-          <button
-            className="px-4 py-3 transition-colors rounded-sm text-sm text-muted-foreground font-medium bg-[#DAD6D1]
-            "
-          >
-            Highlight
-          </button>
-          <button
-            className="px-4 py-3 transition-colors rounded-sm text-sm text-muted-foreground font-medium bg-[muted]
-            "
-          >
-            Cat
-          </button>
-          <button
-            className="px-4 py-3 transition-colors rounded-sm text-sm text-muted-foreground font-medium bg-[muted]
-            "
-          >
-            Inspiration
-          </button>
-          <button
-            className="px-4 py-3 transition-colors rounded-sm text-sm text-muted-foreground font-medium bg-[muted]
-            "
-          >
-            General
-          </button>
+          {categories.map((category) => (
+            <button
+              key={category.value}
+              onClick={() => setCurrentCategory(category.value)}
+              className={`px-4 py-3 transition-colors rounded-sm text-sm font-medium ${
+                currentCategory === category.value
+                  ? "bg-[#DAD6D1] text-foreground"
+                  : "text-muted-foreground hover:bg-black/5"
+              }`}
+            >
+              {category.label}
+            </button>
+          ))}
         </div>
       </div>
       <article className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
