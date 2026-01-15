@@ -122,7 +122,11 @@ function ArticleSection () {
                 title={post.title}
                 description={post.description}
                 author={post.author}
-                date={post.date}
+                date={new Intl.DateTimeFormat('en-GB', { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: '2-digit' 
+              }).format(new Date(post.date))}
               />
             ));
           })()
