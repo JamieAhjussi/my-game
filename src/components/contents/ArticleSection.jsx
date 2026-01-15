@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,10 +10,31 @@ import {
 } from "@/components/ui/select";
 import BlogPosts from "../../data/blogPost";
 import BlogCard from "./BlogCard";
+import axios from "axios";
 
 
 function ArticleSection () {
   const [currentCategory, setCurrentCategory] = useState("highlight");
+  const [posts, setPosts] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  //ดึงข้อมูลจาก server//
+  async function getPosts() {
+    try {
+      setIsLoading(true);
+      const response = await axios.get("https://blog-post-project-api.vercel.app/posts");
+      setPosts(response.data.posts);
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getPosts();
+  }, []);
   
   const categories = [
     { value: "highlight", label: "Highlight" },
@@ -32,6 +53,8 @@ function ArticleSection () {
             <Input
               type="text"
               placeholder="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               className="py-3 rounded-sm placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-muted-foreground"
             />
           </div>
@@ -66,18 +89,44 @@ function ArticleSection () {
           ))}
         </div>
       </div>
-      <article className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
-        {BlogPosts.map((post) => (
-          <BlogCard
-            key={post.id}
-            image={post.image}
-            category={post.category}
-            title={post.title}
-            description={post.description}
-            author={post.author}
-            date={post.date}
-          />
-        ))}
+      <article className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
+        {isLoading ? (
+          <div className="col-span-full py-20 text-center text-muted-foreground">
+            Loading articles...
+          </div>
+        ) : (
+          (() => {
+            const filteredPosts = posts.filter((post) => {
+              const matchesCategory =
+                currentCategory === "highlight" ||
+                post.category.toLowerCase() === currentCategory.toLowerCase();
+              const matchesSearch =
+                post.title.toLowerCase().includes(searchText.toLowerCase()) ||
+                post.description.toLowerCase().includes(searchText.toLowerCase());
+              return matchesCategory && matchesSearch;
+            });
+
+            if (filteredPosts.length === 0) {
+              return (
+                <div className="col-span-full py-20 text-center text-muted-foreground">
+                  No articles found matching your criteria.
+                </div>
+              );
+            }
+
+            return filteredPosts.map((post) => (
+              <BlogCard
+                key={post.id}
+                image={post.image}
+                category={post.category}
+                title={post.title}
+                description={post.description}
+                author={post.author}
+                date={post.date}
+              />
+            ));
+          })()
+        )}
       </article>
     </div>
   );
