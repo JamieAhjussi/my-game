@@ -67,54 +67,17 @@ function ArticleSection () {
         </div>
       </div>
       <article className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
-        <BlogCard
-          image={BlogPosts[0].image}
-          category={BlogPosts[0].category}
-          title={BlogPosts[0].title}
-          description={BlogPosts[0].description}
-          author={BlogPosts[0].author}
-          date={BlogPosts[0].date}
-        />
-        <BlogCard
-          image={BlogPosts[1].image}
-          category={BlogPosts[1].category}
-          title={BlogPosts[1].title}
-          description={BlogPosts[1].description}
-          author={BlogPosts[1].author}
-          date={BlogPosts[1].date}
-        />
-        <BlogCard
-          image={BlogPosts[2].image}
-          category={BlogPosts[2].category}
-          title={BlogPosts[2].title}
-          description={BlogPosts[2].description}
-          author={BlogPosts[2].author}
-          date={BlogPosts[2].date}
-        />
-        <BlogCard
-          image={BlogPosts[3].image}
-          category={BlogPosts[3].category}
-          title={BlogPosts[3].title}
-          description={BlogPosts[3].description}
-          author={BlogPosts[3].author}
-          date={BlogPosts[3].date}
-        />
-        <BlogCard
-          image={BlogPosts[4].image}
-          category={BlogPosts[4].category}
-          title={BlogPosts[4].title}
-          description={BlogPosts[4].description}
-          author={BlogPosts[4].author}
-          date={BlogPosts[4].date}
-        />
-        <BlogCard
-          image={BlogPosts[5].image}
-          category={BlogPosts[5].category}
-          title={BlogPosts[5].title}
-          description={BlogPosts[5].description}
-          author={BlogPosts[5].author}
-          date={BlogPosts[5].date}
-        />
+        {BlogPosts.map((post) => (
+          <BlogCard
+            key={post.id}
+            image={post.image}
+            category={post.category}
+            title={post.title}
+            description={post.description}
+            author={post.author}
+            date={post.date}
+          />
+        ))}
       </article>
     </div>
   );
