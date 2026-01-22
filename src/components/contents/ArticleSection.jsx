@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import BlogPosts from "../../data/blogPost";
 import BlogCard from "./BlogCard";
 import axios from "axios";
 
@@ -18,23 +17,55 @@ function ArticleSection () {
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isFetchMoreLoading, setIsFetchMoreLoading] = useState(false);
 
   //ดึงข้อมูลจาก server//
-  async function getPosts() {
+  async function getPosts(pageNumber = 1, isAppend = false) {
     try {
-      setIsLoading(true);
-      const response = await axios.get("https://blog-post-project-api.vercel.app/posts");
-      setPosts(response.data.posts);
+      if (isAppend) {
+        setIsFetchMoreLoading(true);
+      } else {
+        setIsLoading(true);
+      }
+      
+      const categoryParam = currentCategory === "highlight" ? "" : currentCategory;
+      const response = await axios.get(`https://blog-post-project-api.vercel.app/posts?page=${pageNumber}&limit=6&category=${categoryParam}`);
+      
+      const newPosts = response.data.posts;
+      
+      if (isAppend) {
+        setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+      } else {
+        setPosts(newPosts);
+      }
+
+      // If we got fewer than 6 posts, it means there are no more articles to load
+      if (newPosts.length < 6) {
+        setHasMore(false);
+      } else {
+        setHasMore(true);
+      }
+      
     } catch (error) {
       console.error("Failed to fetch posts:", error);
     } finally {
       setIsLoading(false);
+      setIsFetchMoreLoading(false);
     }
   }
 
   useEffect(() => {
-    getPosts();
-  }, []);
+    setPage(1);
+    getPosts(1, false);
+  }, [currentCategory]);
+
+  const handleViewMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    getPosts(nextPage, true);
+  };
   
   const categories = [
     { value: "highlight", label: "Highlight" },
@@ -132,6 +163,17 @@ function ArticleSection () {
           })()
         )}
       </article>
+      <div className="flex justify-center mt-8">
+        {hasMore && (
+          <button
+            onClick={handleViewMore}
+            disabled={isFetchMoreLoading}
+            className="px-4 py-3 transition-colors rounded-sm text-sm font-medium bg-[#DAD6D1] text-foreground disabled:opacity-50"
+          >
+            {isFetchMoreLoading ? "Loading..." : "View more"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
