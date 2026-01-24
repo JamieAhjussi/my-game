@@ -8,27 +8,33 @@ function BlogCard({
   description,
   author,
   date,
+  id,
 }) {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col gap-4">
-      <a href="#" className="relative h-[212px] sm:h-[360px]">
+      <button
+      onClick={() => navigate(`/blog/${id}`)}
+       className="relative h-[212px] sm:h-[360px]">
         <img
           className="w-full h-full object-cover rounded-md"
           src={image}
           alt={title}
         />
-      </a>
+      </button>
       <div className="flex flex-col">
         <div className="flex">
           <span className="bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mb-2">
             {category}
           </span>
         </div>
-        <a href="#">
+        <button
+        onClick={() => navigate(`/blog/${id}`)}
+        >
           <h2 className="text-start font-bold text-xl mb-2 line-clamp-2 hover:underline">
             {title}
           </h2>
-        </a>
+        </button>
         <p className="text-muted-foreground text-sm mb-4 grow line-clamp-3">
           {description}
         </p>

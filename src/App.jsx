@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import NavBar from './components/contents/NavBar'
-import HeroSection from './components/contents/HeroSection'
-import Footer from './components/contents/Footer'
-import ArticleSection from './components/contents/ArticleSection'
+import HomePage from './components/Pages/HomePage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ViewPostPage from './components/Pages/ViewPostPage'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-    <NavBar/>
-    <HeroSection/>
-    <ArticleSection/>
-    <Footer/>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/blog/:id" element={<ViewPostPage/>}/>
+      </Routes>
+    </Router>
     </>
   )
 }
