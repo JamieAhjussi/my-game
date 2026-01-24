@@ -3,6 +3,7 @@ import NavBar from './components/contents/NavBar'
 import HeroSection from './components/contents/HeroSection'
 import Footer from './components/contents/Footer'
 import ArticleSection from './components/contents/ArticleSection'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
