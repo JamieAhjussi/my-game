@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/select";
 import BlogCard from "./BlogCard";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 function ArticleSection () {
+  const navigate = useNavigate();
   const [currentCategory, setCurrentCategory] = useState("highlight");
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
