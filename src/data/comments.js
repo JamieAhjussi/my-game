@@ -1,5 +1,6 @@
 export const comments = [
   {
+    id: 1,
     name: "Jacob Lash",
     date: "12 September 2024 at 18:30",
     comment:
@@ -7,6 +8,7 @@ export const comments = [
     image: "https://i.pravatar.cc/150?u=jacob",
   },
   {
+    id: 2,
     name: "Ahri",
     date: "12 September 2024 at 18:30",
     comment:
@@ -14,6 +16,7 @@ export const comments = [
     image: "https://i.pravatar.cc/150?u=ahri",
   },
   {
+    id: 3,
     name: "Mimi mama",
     date: "12 September 2024 at 18:30",
     comment:

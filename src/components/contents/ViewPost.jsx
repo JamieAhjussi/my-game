@@ -175,8 +175,8 @@ function Comment() {
         </div>
       </div>
       <div className="space-y-6 px-4">
-        {comments.map((comment, index) => (
-          <div key={index} className="flex flex-col gap-2 mb-4">
+        {comments.map((comment) => (
+          <div key={comment.id} className="flex flex-col gap-2 mb-4">
             <div className="flex space-x-4">
               <div className="shrink-0">
                 <img
@@ -193,7 +193,7 @@ function Comment() {
               </div>
             </div>
             <p className=" text-gray-600">{comment.comment}</p>
-            {index < comments.length - 1 && (
+            {comment.id < comments.length && (
               <hr className="border-gray-300 my-4" />
             )}
           </div>
