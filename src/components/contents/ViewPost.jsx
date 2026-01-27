@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 import JamieP from "../../assets/JamieP.jpg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import AuthModal from "@/components/ui/AuthModal";
+
 
 export default function ViewPost({ postId }) {
   const [img, setImg] = useState("");
@@ -158,6 +160,8 @@ function Share({ likesAmount }) {
 }
 
 function Comment() {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
   return (
     <div>
       <div className="space-y-4 px-4 mb-16">
@@ -165,16 +169,27 @@ function Comment() {
         <div className="space-y-2">
           <Textarea
             placeholder="What are your thoughts?"
+            onFocus={() => setIsAuthModalOpen(true)}
             className="w-full p-4 h-24 resize-none py-3 rounded-sm placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-muted-foreground"
           />
           <div className="flex justify-end">
-            <button className="px-8 py-2 bg-foreground text-white rounded-full hover:bg-muted-foreground transition-colors">
+            <button 
+              onClick={() => setIsAuthModalOpen(true)}
+              className="px-8 py-2 bg-foreground text-white rounded-full hover:bg-muted-foreground transition-colors"
+            >
               Send
             </button>
           </div>
         </div>
       </div>
+      
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
+
       <div className="space-y-6 px-4">
+
         {comments.map((comment) => (
           <div key={comment.id} className="flex flex-col gap-2 mb-4">
             <div className="flex space-x-4">
