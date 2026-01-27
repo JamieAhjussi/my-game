@@ -9,7 +9,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { comments } from "@/data/comments";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/Textarea.jsx";
 import JamieP from "../../assets/JamieP.jpg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
