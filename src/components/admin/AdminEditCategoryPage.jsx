@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Trash2 } from "lucide-react";
 import { AdminSidebar } from "@/components/AdminWebSection";

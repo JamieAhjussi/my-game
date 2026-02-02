@@ -1,5 +1,5 @@
 import { ImageIcon, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AdminSidebar } from "@/components/AdminWebSection";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/Textarea";
 
 export default function AdminEditArticlePage() {
   return (
