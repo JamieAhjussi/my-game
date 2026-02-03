@@ -15,7 +15,7 @@ import AdminProfilePage from "./components/admin/AdminProfilePage";
 import AdminResetPasswordPage from "./components/admin/AdminResetPasswordPage";
 import AdminCreateArticlePage from "./components/admin/AdminCreateArticle";
 import AdminNotificationPage from "./components/admin/AdminNotificationPage";
-import AdminCreateCategoryPage from "./components/admin/AdminCreateCategoryPage";
+import AdminCreateCategoryPage from "./components/admin/AdminCreateCategory";
 import AdminEditCategoryPage from "./components/admin/AdminEditCategoryPage";
 import AdminEditArticlePage from "./components/admin/AdminEditArticlePage";
 
