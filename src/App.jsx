@@ -15,7 +15,7 @@ import AdminProfilePage from "./components/admin/AdminProfilePage";
 import AdminResetPasswordPage from "./components/admin/AdminResetPasswordPage";
 import AdminCreateArticlePage from "./components/admin/AdminCreateArticle";
 import AdminNotificationPage from "./components/admin/AdminNotificationPage";
-import AdminCreateCategoryPage from "./components/admin/AdminCreateCategoryPage";
+import AdminCreateCategoryPage from "./components/admin/AdminCreateCategory";
 import AdminEditCategoryPage from "./components/admin/AdminEditCategoryPage";
 import AdminEditArticlePage from "./components/admin/AdminEditArticlePage";
 
@@ -25,10 +25,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/post/:postId" element={<ViewPostPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/sign-up/success" element={<SignUpSuccessPage />} />
+          <Route path="/blog/:id" element={<ViewPostPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/signup/success" element={<SignUpSuccessPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
@@ -67,6 +66,7 @@ function App() {
             path="/admin/reset-password"
             element={<AdminResetPasswordPage />}
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
       <Toaster
