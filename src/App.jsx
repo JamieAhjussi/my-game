@@ -19,11 +19,14 @@ import AdminCreateCategoryPage from "./components/admin/AdminCreateCategory";
 import AdminEditCategoryPage from "./components/admin/AdminEditCategoryPage";
 import AdminEditArticlePage from "./components/admin/AdminEditArticlePage";
 
+import { AuthProvider } from "@/contexts/authentication";
+
 function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
+        <AuthProvider>
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog/:id" element={<ViewPostPage />} />
           <Route path="/signup" element={<SignUpPage />} />
@@ -68,6 +71,7 @@ function App() {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </AuthProvider>
       </Router>
       <Toaster
         toastOptions={{
