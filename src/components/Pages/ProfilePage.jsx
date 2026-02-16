@@ -11,6 +11,31 @@ import axios from "axios";
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { state, fetchUser } = useAuth();
+
+  useEffect(() => {
+    if (!state.loading && !state.user) {
+      navigate("/login");
+    }
+  }, [state.loading, state.user, navigate]);
+
+  if (state.loading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="animate-pulse text-muted-foreground text-xl font-medium">
+            Loading...
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!state.user) {
+    return null;
+  }
+
   const [profile, setProfile] = useState({
     image: "",
     name: "",

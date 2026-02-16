@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import NavBar from "../contents/NavBar";
+import Footer from "../contents/Footer";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -29,6 +30,25 @@ export default function ResetPasswordPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { state } = useAuth();
 
+  if (state.loading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="animate-pulse text-muted-foreground text-xl font-medium">
+            Loading...
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!state.user) {
+    navigate("/login");
+    return null;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValidPassword = password.trim() !== "";
@@ -51,17 +71,24 @@ export default function ResetPasswordPage() {
     try {
       setIsDialogOpen(false);
 
+      const token = localStorage.getItem("token");
       const response = await axios.put(
-        `https://blog-post-project-api-with-db.vercel.app/auth/reset-password`,
+        `${import.meta.env.VITE_API_BASE_URL}/auth/reset-password`,
         {
           oldPassword: password,
           newPassword: newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
       if (response.status === 200) {
         toast.custom((t) => (
           <div className="bg-green-500 text-white p-4 rounded-sm flex justify-between items-start">
+
             <div>
               <h2 className="font-bold text-lg mb-1">Success!</h2>
               <p className="text-sm">
