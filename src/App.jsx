@@ -18,6 +18,7 @@ import AdminNotificationPage from "./components/admin/AdminNotificationPage";
 import AdminCreateCategoryPage from "./components/admin/AdminCreateCategory";
 import AdminEditCategoryPage from "./components/admin/AdminEditCategoryPage";
 import AdminEditArticlePage from "./components/admin/AdminEditArticlePage";
+import HealthTestPage from "./components/Pages/HealthTestPage";
 
 import { AuthProvider } from "@/contexts/authentication";
 
@@ -70,6 +71,7 @@ function App() {
             element={<AdminResetPasswordPage />}
           />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/test-health" element={<HealthTestPage />} />
         </Routes>
         </AuthProvider>
       </Router>
