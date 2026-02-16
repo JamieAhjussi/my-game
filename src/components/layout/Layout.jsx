@@ -2,7 +2,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-brown-100 font-sans text-brown-600 flex flex-col">
       <header className="p-6 bg-white shadow-sm flex justify-between items-center sticky top-0 z-10">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-orange to-brand-red bg-clip-text text-transparent">
+        <h1 className="text-2xl font-bold bg-linear-to-r from-brand-orange to-brand-red bg-clip-text text-transparent">
           My Game
         </h1>
         <nav className="space-x-4">
@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         </nav>
       </header>
       
-      <main className="flex-grow container mx-auto p-6">
+      <main className="grow container mx-auto p-6">
         {children}
       </main>
 
