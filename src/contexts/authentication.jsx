@@ -20,13 +20,15 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const response = await axios.get(
-        "https://blog-post-project-api-with-db.vercel.app/auth/me",
+        `${import.meta.env.VITE_API_BASE_URL}/protected-route`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setState({ user: response.data.data, loading: false, error: null });
+      // Your new backend returns user data in response.data.user
+      setState({ user: response.data.user, loading: false, error: null });
     } catch (error) {
+      console.error("Fetch user error:", error);
       localStorage.removeItem("token");
       setState({ user: null, loading: false, error: null });
     }
@@ -36,20 +38,22 @@ export const AuthProvider = ({ children }) => {
     try {
       setState({ ...state, loading: true });
       const response = await axios.post(
-        "https://blog-post-project-api-with-db.vercel.app/auth/login",
+        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
         data
       );
-      const token = response.data.token;
+      // Your backend returns access_token
+      const token = response.data.access_token;
       localStorage.setItem("token", token);
       await fetchUser();
       navigate("/");
     } catch (error) {
+      const errorMessage = error.response?.data?.error || "Login failed";
       setState({
         ...state,
         loading: false,
-        error: error.response?.data?.message || "Login failed",
+        error: errorMessage,
       });
-      return { error: error.response?.data?.message || "Login failed" };
+      return { error: errorMessage };
     }
   };
 
@@ -57,18 +61,20 @@ export const AuthProvider = ({ children }) => {
     try {
       setState({ ...state, loading: true });
       await axios.post(
-        "https://blog-post-project-api-with-db.vercel.app/auth/register",
+        `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
         data
       );
       setState({ ...state, loading: false });
       navigate("/login");
+      return { success: true };
     } catch (error) {
+      const errorMessage = error.response?.data?.error || "Registration failed";
       setState({
         ...state,
         loading: false,
-        error: error.response?.data?.message || "Registration failed",
+        error: errorMessage,
       });
-      return { error: error.response?.data?.message || "Registration failed" };
+      return { error: errorMessage };
     }
   };
 
@@ -77,6 +83,7 @@ export const AuthProvider = ({ children }) => {
     setState({ user: null, loading: false, error: null });
     navigate("/login");
   };
+
 
   useEffect(() => {
     fetchUser();

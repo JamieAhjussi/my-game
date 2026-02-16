@@ -99,6 +99,8 @@ export default function SignUpPage() {
             </button>
           </div>
         ));
+      } else {
+        navigate("/signup/success");
       }
     }
   };

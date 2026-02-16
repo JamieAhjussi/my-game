@@ -1,6 +1,8 @@
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthModal({ isOpen, onClose }) {
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
   return (
@@ -25,13 +27,13 @@ export default function AuthModal({ isOpen, onClose }) {
             Create an account to continue
           </h2>
           
-          <button className="w-full bg-black text-white py-4 px-8 rounded-full font-bold text-lg hover:bg-gray-800 active:scale-95 transition-all mb-8 shadow-lg shadow-black/10">
+          <button onClick={() => navigate('/signup')} className="w-full bg-black text-white py-4 px-8 rounded-full font-bold text-lg hover:bg-gray-800 active:scale-95 transition-all mb-8 shadow-lg shadow-black/10">
             Create account
           </button>
           
           <p className="text-gray-500 text-base font-medium">
             Already have an account?{" "}
-            <button className="text-black font-bold hover:underline underline-offset-4">
+            <button onClick={() => navigate('/login')} className="text-black font-bold hover:underline underline-offset-4">
               Log in
             </button>
           </p>
